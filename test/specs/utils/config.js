@@ -35,7 +35,7 @@ describe('config util', () => {
 			},
 		);
 		Given(
-			`a directory path "${process.env.LISKY_CONFIG_DIR}"`,
+			`a directory path "${process.env.LISK_COMMANDER_CONFIG_DIR}"`,
 			given.aDirectoryPath,
 			() => {
 				Given('a config file name "config.json"', given.aConfigFileName, () => {
@@ -165,7 +165,7 @@ describe('config util', () => {
 												() => {
 													Then(
 														`the user should be informed that a config lockfile was found at path "${
-															process.env.LISKY_CONFIG_DIR
+															process.env.LISK_COMMANDER_CONFIG_DIR
 														}/config.lock"`,
 														then.theUserShouldBeInformedThatAConfigLockfileWasFoundAtPath,
 													);

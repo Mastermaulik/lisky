@@ -23,7 +23,7 @@ const description = `Sets configuration <variable> to <value>. Variables availab
 
 	Examples:
 	- set json true
-	- set name my_custom_lisky
+	- set name my_custom_lisk_cli
 `;
 
 const WRITE_FAIL_WARNING =

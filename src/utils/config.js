@@ -20,12 +20,12 @@ import defaultConfig from '../../default_config.json';
 import { readJSONSync, writeJSONSync } from './fs';
 import { logWarning, logError } from './print';
 
-const configDirName = '.lisky';
+const configDirName = '.lisk-commander';
 const configFileName = 'config.json';
 const lockfileName = 'config.lock';
 const homedir = os.homedir();
 const configDirPath =
-	process.env.LISKY_CONFIG_DIR || `${homedir}/${configDirName}`;
+	process.env.LISK_COMMANDER_CONFIG_DIR || `${homedir}/${configDirName}`;
 export const configFilePath = `${configDirPath}/${configFileName}`;
 const lockfilePath = `${configDirPath}/${lockfileName}`;
 
@@ -67,7 +67,7 @@ const checkReadAccess = path => {
 const checkLockfile = path => {
 	const fn = lockfile.lockSync.bind(null, path);
 	const errorCode = 3;
-	const errorMessage = `Config lockfile at ${lockfilePath} found. Are you running Lisky in another process?`;
+	const errorMessage = `Config lockfile at ${lockfilePath} found. Are you running Lisk Commander in another process?`;
 	return attemptCallWithError(fn, errorCode, errorMessage);
 };
 

@@ -22,7 +22,9 @@ describe('set command', () => {
 	beforeEach(setUpCommandSet);
 	afterEach(tearDownCommandSet);
 	Given('a config', given.aConfig, () => {
-		describe(`Given a directory path "${process.env.LISKY_CONFIG_DIR}"`, () => {
+		describe(`Given a directory path "${
+			process.env.LISK_COMMANDER_CONFIG_DIR
+		}"`, () => {
 			beforeEach(given.aDirectoryPath);
 			Given('a config file name "config.json"', given.aConfigFileName, () => {
 				Given('an action "set"', given.anAction, () => {
@@ -259,7 +261,7 @@ describe('set command', () => {
 						});
 					});
 					Given('a variable "name"', given.aVariable, () => {
-						Given('a value "my_custom_lisky"', given.aValue, () => {
+						Given('a value "my_custom_lisk_cli"', given.aValue, () => {
 							Given(
 								'the config file cannot be written',
 								given.theConfigFileCannotBeWritten,
@@ -297,7 +299,7 @@ describe('set command', () => {
 														then.itShouldResolveToAnObjectWithWarning,
 													);
 													Then(
-														'it should resolve to an object with message "Successfully set name to my_custom_lisky."',
+														'it should resolve to an object with message "Successfully set name to my_custom_lisk_cli."',
 														then.itShouldResolveToAnObjectWithMessage,
 													);
 												},
@@ -327,7 +329,7 @@ describe('set command', () => {
 														then.itShouldWriteTheUpdatedConfigToTheConfigFile,
 													);
 													Then(
-														'it should resolve to an object with message "Successfully set name to my_custom_lisky."',
+														'it should resolve to an object with message "Successfully set name to my_custom_lisk_cli."',
 														then.itShouldResolveToAnObjectWithMessage,
 													);
 												},
@@ -351,7 +353,7 @@ describe('set command', () => {
 														then.itShouldWriteTheUpdatedConfigToTheConfigFile,
 													);
 													Then(
-														'it should resolve to an object with message "Successfully set name to my_custom_lisky."',
+														'it should resolve to an object with message "Successfully set name to my_custom_lisk_cli."',
 														then.itShouldResolveToAnObjectWithMessage,
 													);
 												},
