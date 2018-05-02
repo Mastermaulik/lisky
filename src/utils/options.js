@@ -34,6 +34,15 @@ const secondPassphraseDescription = `Specifies a source for your second secret p
 	- --second-passphrase stdin (takes one line only)
 `;
 
+const secondPublicKeyDescription = `Specifies a source for your second public key. It is necessary to verify an transaction associated with second passphrase registered account.
+
+	Note: if both second public key and transaction are passed via stdin, the second public key must be the first line.
+
+	Examples:
+	- --second-public-key file:/path/to/my/second-public-key.txt
+	- --second-public-key stdin
+`;
+
 const passwordDescription = `Specifies a source for your secret password. Lisky will prompt you for input if this option is not set.
 
 	Source must be one of \`prompt\`, \`pass\`, \`env\`, \`file\` or \`stdin\`. For \`pass\`, \`env\` and \`file\` a corresponding identifier must also be provided.
@@ -78,6 +87,7 @@ const options = {
 		'-s, --second-passphrase <source>',
 		secondPassphraseDescription,
 	],
+	secondPublicKey: ['--second-public-key <source>', secondPublicKeyDescription],
 	password: ['-w, --password <source>', passwordDescription],
 	pretty: ['--pretty', prettyDescription],
 	table: ['-t, --table', tableDescription],
