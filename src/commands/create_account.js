@@ -14,6 +14,7 @@
  *
  */
 import cryptography from '../utils/cryptography';
+import { ValidationError } from '../utils/error';
 import { createCommand } from '../utils/helpers';
 import { createMnemonicPassphrase } from '../utils/mnemonic';
 import commonOptions from '../utils/options';
@@ -25,22 +26,34 @@ const description = `Returns a list of randomly-generated mnemonic passphrase wi
 	- create account -n 50
 `;
 
-export const actionCreator = () => async ({ options = {} }) => {
-	const { number = 1 } = options || {};
+const checkIsInt = number => Number.isInteger(parseInt(number, 10));
 
-	const accountsArray = [];
+const checkIsNonZeroInt = number => parseInt(number, 10) !== 0;
 
-	for (let i = 0; i < number; i += 1) {
+export const actionCreator = () => async ({ options }) => {
+	const { number = 1 } = options;
+
+	if (!checkIsInt(number)) {
+		throw new ValidationError(
+			`${number} doesn't represent a valid Integer corresponding to number of accounts`,
+		);
+	}
+
+	if (!checkIsNonZeroInt(number)) {
+		throw new ValidationError('Please provide a number greater than zero');
+	}
+
+	const accountsArray = new Array(number).fill(0).map(() => {
 		const passphrase = createMnemonicPassphrase();
 		const { privateKey, publicKey } = cryptography.getKeys(passphrase);
 		const { address } = cryptography.getAddressFromPublicKey(publicKey);
-		accountsArray.push({
+		return {
 			passphrase,
 			privateKey,
 			publicKey,
 			address,
-		});
-	}
+		};
+	});
 
 	return accountsArray;
 };
@@ -49,7 +62,7 @@ const createAccount = createCommand({
 	command: 'create account',
 	description,
 	actionCreator,
-	options: [commonOptions.numOfAccounts],
+	options: [commonOptions.numberOfAccounts],
 	errorPrefix: 'Could not create account',
 });
 

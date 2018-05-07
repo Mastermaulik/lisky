@@ -222,6 +222,13 @@ export function theActionIsCalled() {
 	return returnValue.catch(e => e);
 }
 
+export function theActionIsCalledWithNumberOfAccounts() {
+	const { action, numberOfAccounts: number } = this.test.ctx;
+	const returnValue = action({ options: { number } });
+	this.test.ctx.returnValue = returnValue;
+	return returnValue.catch(e => e);
+}
+
 export function theCommandIsExecuted() {
 	const { vorpal } = this.test.ctx;
 	const commandToExecute = getFirstQuotedString(this.test.parent.title);
