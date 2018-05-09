@@ -28,10 +28,10 @@ const description = `Returns a list of randomly-generated mnemonic passphrase wi
 
 const checkIsInt = number => Number.isInteger(parseInt(number, 10));
 
-const checkIsNonZeroInt = number => parseInt(number, 10) !== 0;
+const checkIsPositiveInt = number => parseInt(number, 10) > 0;
 
 export const actionCreator = () => async ({ options }) => {
-	const { number = 1 } = options;
+	const { number = 1 } = options || {};
 
 	if (!checkIsInt(number)) {
 		throw new ValidationError(
@@ -39,7 +39,7 @@ export const actionCreator = () => async ({ options }) => {
 		);
 	}
 
-	if (!checkIsNonZeroInt(number)) {
+	if (!checkIsPositiveInt(number)) {
 		throw new ValidationError('Please provide a number greater than zero');
 	}
 

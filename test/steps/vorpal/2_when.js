@@ -223,8 +223,8 @@ export function theActionIsCalled() {
 }
 
 export function theActionIsCalledWithNumberOfAccounts() {
-	const { action, numberOfAccounts: number } = this.test.ctx;
-	const returnValue = action({ options: { number } });
+	const { action, options } = this.test.ctx;
+	const returnValue = action({ options });
 	this.test.ctx.returnValue = returnValue;
 	return returnValue.catch(e => e);
 }

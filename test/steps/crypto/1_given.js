@@ -93,12 +93,6 @@ export function aPassphraseWithPublicKey() {
 	this.test.ctx.publicKey = publicKey;
 }
 
-export function aStringDenotingNumberOfAccounts() {
-	const [numberOfAccounts] = getQuotedStrings(this.test.parent.title);
-
-	this.test.ctx.numberOfAccounts = numberOfAccounts;
-}
-
 export function aPassphraseWithPrivateKeyAndPublicKeyAndAddress() {
 	const [passphrase, privateKey, publicKey, address] = getQuotedStrings(
 		this.test.parent.title,
@@ -134,48 +128,6 @@ export function aPassphraseWithPrivateKeyAndPublicKeyAndAddress() {
 	this.test.ctx.passphrase = passphrase;
 	this.test.ctx.keys = keys;
 	this.test.ctx.address = address;
-}
-
-export function numberOfAccountsAsOneAndPassphraseWithPrivateKeyAndPublicKeyAndAddress() {
-	const [
-		numberOfAccounts,
-		passphrase,
-		privateKey,
-		publicKey,
-		address,
-	] = getQuotedStrings(this.test.parent.title);
-	const keys = {
-		privateKey,
-		publicKey,
-	};
-
-	if (typeof lisk.cryptography.getKeys.returns === 'function') {
-		lisk.cryptography.getKeys.returns(keys);
-	}
-	if (
-		typeof lisk.cryptography.decryptPassphraseWithPassword.returns ===
-		'function'
-	) {
-		lisk.cryptography.decryptPassphraseWithPassword.returns(passphrase);
-	}
-	if (typeof lisk.cryptography.getAddressFromPublicKey.returns === 'function') {
-		lisk.cryptography.getAddressFromPublicKey.returns(address);
-	}
-
-	if (typeof cryptography.getKeys.returns === 'function') {
-		cryptography.getKeys.returns(keys);
-	}
-	if (typeof cryptography.decryptPassphrase.returns === 'function') {
-		cryptography.decryptPassphrase.returns({ passphrase });
-	}
-	if (typeof cryptography.getAddressFromPublicKey.returns === 'function') {
-		cryptography.getAddressFromPublicKey.returns({ address });
-	}
-
-	this.test.ctx.passphrase = passphrase;
-	this.test.ctx.keys = keys;
-	this.test.ctx.address = address;
-	this.test.ctx.numberOfAccounts = numberOfAccounts;
 }
 
 export function aPassword() {
